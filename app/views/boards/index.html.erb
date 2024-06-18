@@ -14,72 +14,104 @@
       Add a new board
     </h2>
 
-    <form action="/create_board" method="post">
-      <div>
-        <label for="name_box">
-          Name
-        </label>
+  </div>
+</div>
 
-        <input type="text" id="name_box" name="query_name">
+<hr>
+<div class="container">
+  <div class="row">
+    <div class="offset-md-3 col-md-6">
+      <div class="card">
+        <div class="card-header d-flex align-items-center">
+          <h1 class="h6">All boards</h1>
+          <button class="ms-auto btn btn-sm btn-outline-success" data-bs-toggle="modal" data-bs-target="#newBoardModal">Add a new board</button></div>
+        <div class="list-group list-group-flush">
+          <%@list_of_boards.each do |a_board| %>
+            <a href="/boards/<%=a_board.id%>" class="d-flex list-group-item list-group-item-action"><%=a_board.name%>
+              <div class="ms-auto">
+                <svg class="svg-inline--fa fa-chevron-right" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-right" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" data-fa-i2svg=""><path fill="currentColor" d="M96 480c-8.188 0-16.38-3.125-22.62-9.375c-12.5-12.5-12.5-32.75 0-45.25L242.8 256L73.38 86.63c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0l192 192c12.5 12.5 12.5 32.75 0 45.25l-192 192C112.4 476.9 104.2 480 96 480z"></path></svg>
+              </div>
+            </a>
+          <% end %>
+
+        </div>
+        <div class="modal fade" id="newBoardModal" tabindex="-1" aria-labelledby="newBoardModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h1 class="modal-title fs-5" id="newBoardModalLabel">New board</h1>
+                <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button></div>
+              <div class="modal-body">
+                <form action="/create_board" method="post">
+                  <div class="mb-3">
+                    <label for="name_box" class="form-label">
+                      Name
+                    </label>
+
+                    <input type="text" id="name_box" name="query_name" class="form-control">
+                  </div>
+                  <div class="d-grid">
+                    <button class="btn btn-success">
+                      Add board
+                    </button>
+                  </div>
+                </form>
+              </div>
+              <div class="modal-footer">
+                <button class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-      <button>
-        Add board
-      </button>
-    </form>
+    </div>
+    <!--      <table border="1">
+        <tr>
+          <th>
+            ID
+          </th>
+
+          <th>
+            Name
+          </th>
+
+          <th>
+            Created at
+          </th>
+
+          <th>
+            Updated at
+          </th>
+
+          <th>
+          </th>
+        </tr>
+
+        <%# @list_of_boards.each do |a_board| %>-->
+    <!--          <tr>
+            <td>
+              <%#= a_board.id %>-->
+    <!--            </td>
+
+            <td>
+              <%#= a_board.name %>-->
+    <!--            </td>
+
+            <td>
+              <%#= time_ago_in_words(a_board.created_at) %> ago-->
+    <!--            </td>
+            <td>
+              <%#= time_ago_in_words(a_board.updated_at) %> ago-->
+    <!--            </td>
+
+            <td>
+              <a href="/boards/<%#= a_board.id %>">
+                Show details
+              </a>
+            </td>
+          </tr>
+        <%# end %>-->
+    <!--      </table>-->
   </div>
 </div>
-
-<hr>
-<div>
-  <div>
-    <table border="1">
-      <tr>
-        <th>
-          ID
-        </th>
-
-        <th>
-          Name
-        </th>
-
-        <th>
-          Created at
-        </th>
-
-        <th>
-          Updated at
-        </th>
-
-        <th>
-        </th>
-      </tr>
-
-      <% @list_of_boards.each do |a_board| %>
-      <tr>
-        <td>
-          <%= a_board.id %>
-        </td>
-
-        <td>
-          <%= a_board.name %>
-        </td>
-
-        <td>
-          <%= time_ago_in_words(a_board.created_at) %> ago
-        </td>
-        <td>
-          <%= time_ago_in_words(a_board.updated_at) %> ago
-        </td>
-
-        <td>
-          <a href="/boards/<%= a_board.id %>">
-            Show details
-          </a>
-        </td>
-      </tr>
-      <% end %>
-    </table>
-  </div>
 </div>
-
-<hr>
